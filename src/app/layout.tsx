@@ -3,11 +3,11 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { M_PLUS_2 } from "next/font/google";
 
-const APP_NAME = "Nichiroku";
-const APP_DEFAULT_TITLE = "Nichiroku";
-const APP_TITLE_TEMPLATE = "%s - Nichiroku";
-const APP_DESCRIPTION = "Awesome Dairy app!!1";
-const APP_URL = "https://nichiroku.app";
+export const APP_NAME = "Nichiroku";
+export const APP_DEFAULT_TITLE = "Nichiroku";
+export const APP_TITLE_TEMPLATE = "%s - Nichiroku";
+export const APP_DESCRIPTION = "Awesome Dairy app!!1";
+export const APP_URL = "https://nichiroku.app";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
