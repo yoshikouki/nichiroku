@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from "next";
 import { M_PLUS_2 } from "next/font/google";
 import { cookies } from "next/headers";
 import { cn } from "../lib/utils";
+import { Footer } from "./footer";
 import { ThemeProvider } from "./theme-provider";
 
 export const APP_NAME = "Nichiroku";
@@ -48,9 +49,15 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={theme} style={{ colorScheme: theme }}>
-      <body className={cn("bg-background text-foreground", font.className)}>
+      <body
+        className={cn(
+          "min-h-[100dvh] bg-background text-foreground",
+          font.className
+        )}
+      >
         <ThemeProvider attribute="class" defaultTheme="system">
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
