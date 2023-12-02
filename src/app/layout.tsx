@@ -3,7 +3,9 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { M_PLUS_2 } from "next/font/google";
 import { cookies } from "next/headers";
-import { cn } from "../lib/utils";
+
+import { Toaster } from "@/components/ui/toaster";
+import { cn } from "@/lib/utils";
 import { Footer } from "./footer";
 import { ThemeProvider } from "./theme-provider";
 
@@ -58,6 +60,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system">
           {children}
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
