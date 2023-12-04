@@ -75,7 +75,7 @@ export const ArticleEditor = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(() => {})}
-          className="min-h-[100dvh] space-y-6 flex flex-col"
+          className="min-h-full space-y-6 flex flex-col"
         >
           <FormField
             control={form.control}
@@ -85,7 +85,7 @@ export const ArticleEditor = () => {
                 <FormControl>
                   <Input
                     placeholder={dateFormatter.format(formData.date)}
-                    className="resize-none border-0 bg-transparent px-4 w-full focus-visible:ring-0"
+                    className="px-4 w-full font-extrabold text-2xl resize-none bg-transparent border-0 focus-visible:ring-0"
                     {...field}
                   />
                 </FormControl>
@@ -101,7 +101,7 @@ export const ArticleEditor = () => {
                 <FormControl>
                   <Textarea
                     placeholder="Tell me what you like to keep..."
-                    className="flex-grow resize-none border-0 bg-transparent px-4 w-full h-full focus-visible:ring-0"
+                    className="flex-grow px-4 w-full h-auto min-h-[25rem] text-lg resize-none bg-transparent border-0 focus-visible:ring-0"
                     {...field}
                   />
                 </FormControl>
