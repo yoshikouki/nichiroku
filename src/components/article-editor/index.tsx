@@ -1,10 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "lucide-react";
-import { useCallback, useEffect, useRef } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -22,53 +18,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
+import { useArticleEditor } from "./use-article-editor";
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP");
 
-const articleSchema = z.object({
-  title: z.string().optional(),
-  date: z.date(),
-  content: z.string().optional(),
-});
-type ArticleSchema = z.infer<typeof articleSchema>;
-
 export const ArticleEditor = () => {
-  const form = useForm<ArticleSchema>({
-    resolver: zodResolver(articleSchema),
-    defaultValues: {
-      date: new Date(),
-    },
-  });
-  const formData = useWatch({ control: form.control });
-  const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
-  const { toast } = useToast();
-
-  const onSave = useCallback(() => {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(form.watch(), null, 2)}
-          </code>
-        </pre>
-      ),
-    });
-  }, [form, toast]);
-
-  useEffect(() => {
-    if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current);
-
-    autoSaveTimer.current = setTimeout(() => {
-      onSave();
-    }, 2000);
-
-    return () => {
-      if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current);
-    };
-  }, [formData, onSave]);
+  const { form, date } = useArticleEditor();
 
   return (
     <article>
@@ -84,7 +40,7 @@ export const ArticleEditor = () => {
               <FormItem>
                 <FormControl>
                   <Input
-                    placeholder={dateFormatter.format(formData.date)}
+                    placeholder={dateFormatter.format(date)}
                     className="px-4 w-full font-extrabold text-2xl resize-none bg-transparent border-0 focus-visible:ring-0"
                     {...field}
                   />
