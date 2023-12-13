@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
+import { TRPCReactProvider } from "@/trpc/react";
 import { Footer } from "./footer";
 import { ThemeProvider } from "./theme-provider";
 
@@ -57,11 +58,13 @@ export default function RootLayout({
           font.className
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
-          <Footer />
-          <Toaster />
-        </ThemeProvider>
+        <TRPCReactProvider cookies={cookies().toString()}>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            {children}
+            <Footer />
+            <Toaster />
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
